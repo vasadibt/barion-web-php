@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2016 Barion Payment Inc. All Rights Reserved.
  * <p/>
@@ -15,13 +14,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+namespace Barion\models;
+
+/**
+ * Class TransactionToRefundModel
+ * @package Barion\models
+ */
 class TransactionToRefundModel
 {
+    /**
+     * @var null
+     */
     public $TransactionId;
+    /**
+     * @var null
+     */
     public $POSTransactionId;
+    /**
+     * @var null
+     */
     public $AmountToRefund;
+    /**
+     * @var null
+     */
     public $Comment;
 
+    /**
+     * TransactionToRefundModel constructor.
+     * @param null $transactionId
+     * @param null $posTransactionId
+     * @param null $amountToRefund
+     * @param null $comment
+     */
     function __construct($transactionId = null, $posTransactionId = null, $amountToRefund = null, $comment = null)
     {
         $this->TransactionId = $transactionId;

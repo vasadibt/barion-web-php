@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2016 Barion Payment Inc. All Rights Reserved.
  * <p/>
@@ -19,14 +18,12 @@
  * @return null
  */
 
-/*
-*  Helper functions
-*/
+namespace Barion\helpers;
 
 /**
  * Gets the value of the specified property from the json
  *
- * @param string $json The json
+ * @param array $json The json
  * @param string $propertyName
  * @return null The value of the property
  */

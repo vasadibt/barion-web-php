@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2016 Barion Payment Inc. All Rights Reserved.
  * <p/>
@@ -15,15 +14,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+namespace Barion\models;
+
+/**
+ * Class PaymentTransactionModel
+ * @package Barion\models
+ */
 class PaymentTransactionModel
 {
+    /**
+     * @var string
+     */
     public $POSTransactionId;
+    /**
+     * @var string
+     */
     public $Payee;
+    /**
+     * @var int
+     */
     public $Total;
+    /**
+     * @var string
+     */
     public $Comment;
+    /**
+     * @var ItemModel[]
+     */
     public $Items;
+    /**
+     * @var PayeeTransactionModel[]
+     */
     public $PayeeTransactions;
 
+    /**
+     * PaymentTransactionModel constructor.
+     */
     function __construct()
     {
         $this->POSTransactionId = "";
@@ -34,6 +61,9 @@ class PaymentTransactionModel
         $this->PayeeTransactions = array();
     }
 
+    /**
+     * @param ItemModel $item
+     */
     public function AddItem(ItemModel $item)
     {
         if ($this->Items == null) {
@@ -42,6 +72,9 @@ class PaymentTransactionModel
         array_push($this->Items, $item);
     }
 
+    /**
+     * @param ItemModel[] $items
+     */
     public function AddItems($items)
     {
         if (!empty($items)) {
@@ -53,6 +86,9 @@ class PaymentTransactionModel
         }
     }
 
+    /**
+     * @param PayeeTransactionModel $model
+     */
     public function AddPayeeTransaction(PayeeTransactionModel $model)
     {
         if ($this->PayeeTransactions == null) {
@@ -61,6 +97,9 @@ class PaymentTransactionModel
         array_push($this->PayeeTransactions, $model);
     }
 
+    /**
+     * @param PayeeTransactionModel $transactions
+     */
     public function AddPayeeTransactions($transactions)
     {
         if (!empty($transactions)) {

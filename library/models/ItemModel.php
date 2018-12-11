@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2016 Barion Payment Inc. All Rights Reserved.
  * <p/>
@@ -15,16 +14,50 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+namespace Barion\models;
+
+use Barion\helpers\iBarionModel;
+use function Barion\helpers\jget;
+
+/**
+ * Class ItemModel
+ * @package Barion\models
+ */
 class ItemModel implements iBarionModel
 {
+    /**
+     * @var string
+     */
     public $Name;
+    /**
+     * @var string
+     */
     public $Description;
+    /**
+     * @var int
+     */
     public $Quantity;
+    /**
+     * @var string
+     */
     public $Unit;
+    /**
+     * @var int
+     */
     public $UnitPrice;
+    /**
+     * @var int
+     */
     public $ItemTotal;
+    /**
+     * @var string
+     */
     public $SKU;
 
+    /**
+     * ItemModel constructor.
+     */
     function __construct()
     {
         $this->Name = "";
@@ -36,6 +69,9 @@ class ItemModel implements iBarionModel
         $this->SKU = "";
     }
 
+    /**
+     * @param array $json
+     */
     public function fromJson($json)
     {
         if (!empty($json)) {

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2016 Barion Payment Inc. All Rights Reserved.
  * <p/>
@@ -15,16 +14,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+namespace Barion\models;
+
+/**
+ * Class RefundRequestModel
+ * @package Barion\models
+ */
 class RefundRequestModel extends BaseRequestModel
 {
+    /**
+     * @var string
+     */
     public $PaymentId;
+    /**
+     * @var
+     */
     public $TransactionsToRefund;
 
+    /**
+     * RefundRequestModel constructor.
+     * @param string $paymentId
+     */
     function __construct($paymentId)
     {
         $this->PaymentId = $paymentId;
     }
 
+    /**
+     * @param TransactionToRefundModel $transaction
+     */
     public function AddTransaction(TransactionToRefundModel $transaction)
     {
         if ($this->TransactionsToRefund == null) {
@@ -33,6 +52,9 @@ class RefundRequestModel extends BaseRequestModel
         array_push($this->TransactionsToRefund, $transaction);
     }
 
+    /**
+     * @param $transactions
+     */
     public function AddTransactions($transactions)
     {
         if (!empty($transactions)) {
@@ -43,5 +65,4 @@ class RefundRequestModel extends BaseRequestModel
             }
         }
     }
-
 }

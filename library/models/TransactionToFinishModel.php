@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2016 Barion Payment Inc. All Rights Reserved.
  * <p/>
@@ -15,14 +14,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+namespace Barion\models;
+
+/**
+ * Class TransactionToFinishModel
+ * @package Barion\models
+ */
 class TransactionToFinishModel
 {
+    /**
+     * @var string
+     */
     public $TransactionId;
+    /**
+     * @var int
+     */
     public $Total;
+    /**
+     * @var array
+     */
     public $PayeeTransactions;
+    /**
+     * @var array
+     */
     public $Items;
+    /**
+     * @var string
+     */
     public $Comment;
 
+    /**
+     * TransactionToFinishModel constructor.
+     */
     function __construct()
     {
         $this->TransactionId = "";
@@ -32,6 +56,9 @@ class TransactionToFinishModel
         $this->Items = array();
     }
 
+    /**
+     * @param ItemModel $item
+     */
     public function AddItem(ItemModel $item)
     {
         if ($this->Items == null) {
@@ -40,6 +67,9 @@ class TransactionToFinishModel
         array_push($this->Items, $item);
     }
 
+    /**
+     * @param $items
+     */
     public function AddItems($items)
     {
         if (!empty($items)) {
@@ -50,7 +80,10 @@ class TransactionToFinishModel
             }
         }
     }
-    
+
+    /**
+     * @param PayeeTransactionToFinishModel $model
+     */
     public function AddPayeeTransaction(PayeeTransactionToFinishModel $model)
     {
         if ($this->PayeeTransactions == null) {
@@ -59,6 +92,9 @@ class TransactionToFinishModel
         array_push($this->PayeeTransactions, $model);
     }
 
+    /**
+     * @param $transactions
+     */
     public function AddPayeeTransactions($transactions)
     {
         if (!empty($transactions)) {

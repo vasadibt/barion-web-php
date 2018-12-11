@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2016 Barion Payment Inc. All Rights Reserved.
  * <p/>
@@ -15,17 +14,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+namespace Barion\models;
+
+/**
+ * Class BaseResponseModel
+ * @package Barion\models
+ */
 class BaseResponseModel
 {
     public $Errors;
     public $RequestSuccessful;
 
+    /**
+     * BaseResponseModel constructor.
+     */
     function __construct()
     {
         $this->Errors = array();
         $this->RequestSuccessful = false;
     }
 
+    /**
+     * @param array $json
+     */
     public function fromJson($json)
     {
         if (!empty($json)) {

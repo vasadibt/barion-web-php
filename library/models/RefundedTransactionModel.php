@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2016 Barion Payment Inc. All Rights Reserved.
  * <p/>
@@ -15,14 +14,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class RefundedTransactionModel implements iBarionModel {
 
+namespace Barion\models;
+
+use Barion\helpers\iBarionModel;
+
+/**
+ * Class RefundedTransactionModel
+ * @package Barion\models
+ */
+class RefundedTransactionModel implements iBarionModel
+{
+    /**
+     * @var string
+     */
     public $TransactionId;
+    /**
+     * @var int
+     */
     public $Total;
+    /**
+     * @var string
+     */
     public $POSTransactionId;
+    /**
+     * @var string
+     */
     public $Comment;
+    /**
+     * @var string
+     */
     public $Status;
 
+    /**
+     * RefundedTransactionModel constructor.
+     */
     function __construct()
     {
         $this->TransactionId = "";
@@ -32,7 +58,9 @@ class RefundedTransactionModel implements iBarionModel {
         $this->Status = "";
     }
 
-
+    /**
+     * @param array $json
+     */
     public function fromJson($json)
     {
         if (!empty($json)) {

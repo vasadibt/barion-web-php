@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2016 Barion Payment Inc. All Rights Reserved.
  * <p/>
@@ -15,6 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+namespace Barion\models;
+
+use Barion\helpers\iBarionModel;
+use function Barion\helpers\jget;
+
+/**
+ * Class BankCardModel
+ * @package Barion\models
+ */
 class BankCardModel implements iBarionModel
 {
     public $MaskedPan;
@@ -22,6 +31,9 @@ class BankCardModel implements iBarionModel
     public $ValidThruYear;
     public $ValidThruMonth;
 
+    /**
+     * BankCardModel constructor.
+     */
     function __construct()
     {
         $this->MaskedPan = "";
@@ -30,6 +42,9 @@ class BankCardModel implements iBarionModel
         $this->ValidThruMonth = "";
     }
 
+    /**
+     * @param array $json
+     */
     public function fromJson($json)
     {
         if (!empty($json)) {

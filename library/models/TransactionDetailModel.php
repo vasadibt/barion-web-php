@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2016 Barion Payment Inc. All Rights Reserved.
  * <p/>
@@ -15,23 +14,77 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+namespace Barion\models;
+
+use Barion\helpers\iBarionModel;
+
+/**
+ * Class TransactionDetailModel
+ * @package Barion\models
+ */
 class TransactionDetailModel implements iBarionModel
 {
+    /**
+     * @var string
+     */
     public $TransactionId;
+    /**
+     * @var string
+     */
     public $POSTransactionId;
+    /**
+     * @var string
+     */
     public $TransactionTime;
+    /**
+     * @var int
+     */
     public $Total;
+    /**
+     * @var string
+     */
     public $Currency;
+    /**
+     * @var UserModel
+     */
     public $Payer;
+    /**
+     * @var UserModel
+     */
     public $Payee;
+    /**
+     * @var string
+     */
     public $Comment;
+    /**
+     * @var string
+     */
     public $Status;
+    /**
+     * @var string
+     */
     public $TransactionType;
+    /**
+     * @var array
+     */
     public $Items;
+    /**
+     * @var string
+     */
     public $RelatedId;
+    /**
+     * @var string
+     */
     public $POSId;
+    /**
+     * @var string
+     */
     public $PaymentId;
 
+    /**
+     * TransactionDetailModel constructor.
+     */
     function __construct()
     {
         $this->TransactionId = "";
@@ -50,6 +103,9 @@ class TransactionDetailModel implements iBarionModel
         $this->PaymentId = "";
     }
 
+    /**
+     * @param array $json
+     */
     public function fromJson($json)
     {
         if (!empty($json)) {

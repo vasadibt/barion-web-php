@@ -1,0 +1,18 @@
+{
+	"name": "vasadibt/barion-web-php",
+	"description": "Barion web API",
+	"type": "yii2-extension",
+	"keywords": ["yii2","extension","barion", "rest", "api", "php"],
+	"license": "BSD-3-Clause",
+	"authors": [
+		{
+			"name": "Tamás Vasadi-Balogh",
+			"email": "vasadibt@gmail.com"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"Barion\\": "library/"
+		}
+	}
+}

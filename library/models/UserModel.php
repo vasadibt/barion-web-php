@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2016 Barion Payment Inc. All Rights Reserved.
  * <p/>
@@ -15,17 +14,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+namespace Barion\models;
+
+use Barion\helpers\iBarionModel;
+
+/**
+ * Class UserModel
+ * @package Barion\models
+ */
 class UserModel implements iBarionModel
 {
+    /**
+     * @var string
+     */
     public $Name;
+    /**
+     * @var string
+     */
     public $Email;
 
+    /**
+     * UserModel constructor.
+     */
     function __construct()
     {
         $this->Name = "";
         $this->Email = "";
     }
 
+    /**
+     * @param $json
+     */
     function fromJson($json)
     {
         if (!empty($json)) {

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2016 Barion Payment Inc. All Rights Reserved.
  * <p/>
@@ -15,10 +14,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+namespace Barion\models;
+
+/**
+ * Class PaymentStateRequestModel
+ * @package Barion\models
+ */
 class PaymentStateRequestModel extends BaseRequestModel
 {
+    /**
+     * @var string
+     */
     public $PaymentId;
 
+    /**
+     * PaymentStateRequestModel constructor.
+     * @param $paymentId
+     */
     function __construct($paymentId)
     {
         $this->PaymentId = $paymentId;

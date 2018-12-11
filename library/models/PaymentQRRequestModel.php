@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2016 Barion Payment Inc. All Rights Reserved.
  * <p/>
@@ -15,13 +14,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+namespace Barion\models;
+
+use Barion\library\QRCodeSize;
+
+/**
+ * Class PaymentQRRequestModel
+ * @package Barion\models
+ */
 class PaymentQRRequestModel extends BaseRequestModel
 {
+    /**
+     * @var string
+     */
     public $UserName;
+    /**
+     * @var string
+     */
     public $Password;
+    /**
+     * @var string
+     */
     public $PaymentId;
+    /**
+     * @var string
+     */
     public $Size;
 
+    /**
+     * PaymentQRRequestModel constructor.
+     * @param $paymentId
+     */
     function __construct($paymentId)
     {
         $this->PaymentId = $paymentId;

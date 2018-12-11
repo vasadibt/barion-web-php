@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2016 Barion Payment Inc. All Rights Reserved.
  * <p/>
@@ -16,17 +15,24 @@
  * limitations under the License.
  */
 
-/* URL constants for Barion API communication */
+namespace Barion\library;
 
-DEFINE("BARION_API_URL_PROD", "https://api.barion.com");
-DEFINE("BARION_WEB_URL_PROD", "https://secure.barion.com/Pay");
-DEFINE("BARION_API_URL_TEST", "https://api.test.barion.com");
-DEFINE("BARION_WEB_URL_TEST", "https://secure.test.barion.com/Pay");
+/**
+ * Class Constants
+ * URL constants for Barion API communication
+ */
+abstract class Constants
+{
+    const BARION_API_URL_PROD = "https://api.barion.com";
+    const BARION_WEB_URL_PROD = "https://secure.barion.com/Pay";
+    const BARION_API_URL_TEST = "https://api.test.barion.com";
+    const BARION_WEB_URL_TEST = "https://secure.test.barion.com/Pay";
 
-DEFINE("API_ENDPOINT_PREPAREPAYMENT", "/Payment/Start");
-DEFINE("API_ENDPOINT_PAYMENTSTATE", "/Payment/GetPaymentState");
-DEFINE("API_ENDPOINT_QRCODE", "/QR/Generate");
-DEFINE("API_ENDPOINT_REFUND", "/Payment/Refund");
-DEFINE("API_ENDPOINT_FINISHRESERVATION", "/Payment/FinishReservation");
+    const API_ENDPOINT_PREPAREPAYMENT = "/Payment/Start";
+    const API_ENDPOINT_PAYMENTSTATE = "/Payment/GetPaymentState";
+    const API_ENDPOINT_QRCODE = "/QR/Generate";
+    const API_ENDPOINT_REFUND = "/Payment/Refund";
+    const API_ENDPOINT_FINISHRESERVATION = "/Payment/FinishReservation";
 
-DEFINE("PAYMENT_URL", "/Pay");
+    const PAYMENT_URL = "/Pay";
+}

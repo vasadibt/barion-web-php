@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2016 Barion Payment Inc. All Rights Reserved.
  * <p/>
@@ -15,14 +14,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+namespace Barion\models;
+
+use Barion\helpers\iBarionModel;
+
+/**
+ * Class TransactionResponseModel
+ * @package Barion\models
+ */
 class TransactionResponseModel implements iBarionModel
 {
+    /**
+     * @var string
+     */
     public $POSTransactionId;
+    /**
+     * @var string
+     */
     public $TransactionId;
+    /**
+     * @var string
+     */
     public $Status;
+    /**
+     * @var string
+     */
     public $TransactionTime;
+    /**
+     * @var string
+     */
     public $RelatedId;
 
+    /**
+     * TransactionResponseModel constructor.
+     */
     function __construct()
     {
         $this->POSTransactionId = "";
@@ -32,6 +58,9 @@ class TransactionResponseModel implements iBarionModel
         $this->RelatedId = "";
     }
 
+    /**
+     * @param array $json
+     */
     public function fromJson($json)
     {
         if (!empty($json)) {

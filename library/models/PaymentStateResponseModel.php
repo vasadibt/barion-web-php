@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2016 Barion Payment Inc. All Rights Reserved.
  * <p/>
@@ -15,33 +14,118 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+namespace Barion\models;
+
+use Barion\helpers\iBarionModel;
+use function Barion\helpers\jget;
+
+/**
+ * Class PaymentStateResponseModel
+ * @package Barion\models
+ */
 class PaymentStateResponseModel extends BaseResponseModel implements iBarionModel
 {
+    /**
+     * @var string
+     */
     public $PaymentId;
+    /**
+     * @var string
+     */
     public $PaymentRequestId;
+    /**
+     * @var string
+     */
     public $OrderNumber;
+    /**
+     * @var string
+     */
     public $POSId;
+    /**
+     * @var string
+     */
     public $POSName;
+    /**
+     * @var string
+     */
     public $POSOwnerEmail;
+    /**
+     * @var string
+     */
     public $Status;
+    /**
+     * @var string
+     */
     public $PaymentType;
+    /**
+     * @var string
+     */
     public $FundingSource;
+    /**
+     * @var FundingInformationModel
+     */
     public $FundingInformation;
+    /**
+     * @var string
+     */
     public $AllowedFundingSources;
+    /**
+     * @var string
+     */
     public $GuestCheckout;
+    /**
+     * @var string
+     */
     public $CreatedAt;
+    /**
+     * @var string
+     */
     public $ValidUntil;
+    /**
+     * @var string
+     */
     public $CompletedAt;
+    /**
+     * @var string
+     */
     public $ReservedUntil;
+    /**
+     * @var int
+     */
     public $Total;
+    /**
+     * @var string
+     */
     public $Currency;
+    /**
+     * @var TransactionDetailModel[]
+     */
     public $Transactions;
+    /**
+     * @var string
+     */
     public $RecurrenceResult;
+    /**
+     * @var string
+     */
     public $SuggestedLocale;
+    /**
+     * @var int
+     */
     public $FraudRiskScore;
+    /**
+     * @var string
+     */
     public $RedirectUrl;
+    /**
+     * @var string
+     */
     public $CallbackUrl;
 
+    /**
+     * PaymentStateResponseModel constructor.
+     */
     function __construct()
     {
         parent::__construct();
@@ -71,6 +155,9 @@ class PaymentStateResponseModel extends BaseResponseModel implements iBarionMode
         $this->CallbackUrl = "";
     }
 
+    /**
+     * @param array $json
+     */
     public function fromJson($json)
     {
         if (!empty($json)) {
@@ -112,7 +199,6 @@ class PaymentStateResponseModel extends BaseResponseModel implements iBarionMode
                     array_push($this->Transactions, $tr);
                 }
             }
-
         }
     }
 }

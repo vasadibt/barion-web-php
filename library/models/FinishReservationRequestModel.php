@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2016 Barion Payment Inc. All Rights Reserved.
  * <p/>
@@ -15,17 +14,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+namespace Barion\models;
+
+/**
+ * Class FinishReservationRequestModel
+ * @package Barion\models
+ */
 class FinishReservationRequestModel extends BaseRequestModel
 {
+    /**
+     * @var string
+     */
     public $PaymentId;
+    /**
+     * @var TransactionToFinishModel[]
+     */
     public $Transactions;
 
+    /**
+     * FinishReservationRequestModel constructor.
+     * @param $paymentId
+     */
     function __construct($paymentId)
     {
         $this->PaymentId = $paymentId;
         $this->Transactions = array();
     }
 
+    /**
+     * @param TransactionToFinishModel $transaction
+     */
     public function AddTransaction(TransactionToFinishModel $transaction)
     {
         if ($this->Transactions == null) {
@@ -34,6 +53,9 @@ class FinishReservationRequestModel extends BaseRequestModel
         array_push($this->Transactions, $transaction);
     }
 
+    /**
+     * @param TransactionToFinishModel $transactions
+     */
     public function AddTransactions($transactions)
     {
         if (!empty($transactions)) {

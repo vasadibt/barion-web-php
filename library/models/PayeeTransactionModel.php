@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2016 Barion Payment Inc. All Rights Reserved.
  * <p/>
@@ -15,13 +14,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+namespace Barion\models;
+
+/**
+ * Class PayeeTransactionModel
+ * @package Barion\models
+ */
 class PayeeTransactionModel
 {
+    /**
+     * @var string
+     */
     public $POSTransactionId;
+    /**
+     * @var string
+     */
     public $Payee;
+    /**
+     * @var int
+     */
     public $Total;
+    /**
+     * @var string
+     */
     public $Comment;
 
+    /**
+     * PayeeTransactionModel constructor.
+     */
     function __construct()
     {
         $this->POSTransactionId = "";

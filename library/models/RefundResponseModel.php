@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2016 Barion Payment Inc. All Rights Reserved.
  * <p/>
@@ -15,11 +14,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+namespace Barion\models;
+
+use Barion\helpers\iBarionModel;
+use function Barion\helpers\jget;
+
+/**
+ * Class RefundResponseModel
+ * @package Barion\models
+ */
 class RefundResponseModel extends BaseResponseModel implements iBarionModel
 {
+    /**
+     * @var string
+     */
     public $PaymentId;
+    /**
+     * @var array
+     */
     public $RefundedTransactions;
 
+    /**
+     * RefundResponseModel constructor.
+     */
     function __construct()
     {
         parent::__construct();
@@ -27,6 +45,9 @@ class RefundResponseModel extends BaseResponseModel implements iBarionModel
         $this->RefundedTransactions = array();
     }
 
+    /**
+     * @param array $json
+     */
     public function fromJson($json)
     {
         if (!empty($json)) {

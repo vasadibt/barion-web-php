@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2016 Barion Payment Inc. All Rights Reserved.
  * <p/>
@@ -15,12 +14,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+namespace Barion\models;
+
+/**
+ * Class PayeeTransactionToFinishModel
+ * @package Barion\models
+ */
 class PayeeTransactionToFinishModel
 {
+    /**
+     * @var string
+     */
     public $TransactionId;
+    /**
+     * @var int
+     */
     public $Total;
+    /**
+     * @var string
+     */
     public $Comment;
 
+    /**
+     * PayeeTransactionToFinishModel constructor.
+     */
     function __construct()
     {
         $this->TransactionId = "";
