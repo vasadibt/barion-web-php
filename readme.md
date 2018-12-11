@@ -1,4 +1,26 @@
 ﻿# BarionPHP
+===========
+Barion web REST API
+
+Installation
+------------
+
+The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
+
+Either run
+
+```
+php composer.phar require --prefer-dist vasadibt/barion-web-php "dev-master"
+```
+
+or add
+
+```
+"vasadibt/barion-web-php": "dev-master"
+```
+
+to the require section of your `composer.json` file.
+
 
 **BarionPHP** is a compact PHP library to manage online e-money and card payments via the *Barion Smart Gateway*.
 It allows you to accept credit card and e-money payments in just a few lines of code.
