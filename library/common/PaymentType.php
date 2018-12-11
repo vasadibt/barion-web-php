@@ -6,7 +6,7 @@
  * Time: 11:52
  */
 
-namespace Barion\library;
+namespace Barion\common;
 
 /**
  * Class PaymentType

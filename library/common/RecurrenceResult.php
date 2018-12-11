@@ -6,7 +6,7 @@
  * Time: 11:53
  */
 
-namespace Barion\library;
+namespace Barion\common;
 
 /**
  * Class RecurrenceResult
