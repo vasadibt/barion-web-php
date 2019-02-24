@@ -17,9 +17,9 @@
 
 namespace Barion\models;
 
-use Barion\library\Currency;
-use Barion\library\FundingSourceType;
-use Barion\library\PaymentType;
+use Barion\common\Currency;
+use Barion\common\FundingSourceType;
+use Barion\common\PaymentType;
 
 /**
  * Class PreparePaymentRequestModel

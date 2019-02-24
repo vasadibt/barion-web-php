@@ -17,9 +17,9 @@
 
 namespace Barion;
 
-use Barion\library\BarionEnvironment;
-use Barion\library\Constants;
-use Barion\library\QRCodeSize;
+use Barion\common\BarionEnvironment;
+use Barion\common\Constants;
+use Barion\common\QRCodeSize;
 use Barion\models\ApiErrorModel;
 use Barion\models\BaseResponseModel;
 use Barion\models\FinishReservationRequestModel;
