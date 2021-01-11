@@ -1,16 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Tamás
- * Date: 2018. 12. 11.
- * Time: 11:54
- */
 
 namespace Barion\common;
 
 /**
  * Class CardType
- * @package Barion\library
+ * @package Barion\common
  */
 abstract class CardType
 {

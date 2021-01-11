@@ -1,16 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Tamás
- * Date: 2018. 12. 11.
- * Time: 11:54
- */
 
 namespace Barion\common;
 
 /**
  * Class UILocale
- * @package Barion\library
+ * @package Barion\common
  */
 abstract class UILocale
 {
@@ -20,4 +14,6 @@ abstract class UILocale
     const SL = "sl-SI";
     const SK = "sk-SK";
     const FR = "fr-FR";
+    const CZ = "cs-CZ";
+    const GR = "el-GR";
 }

@@ -1,16 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Tamás
- * Date: 2018. 12. 11.
- * Time: 11:52
- */
 
 namespace Barion\common;
 
 /**
  * Class BarionEnvironment
- * @package Barion\library
+ * @package Barion\common
  */
 abstract class BarionEnvironment
 {

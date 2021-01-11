@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Tamás
- * Date: 2018. 12. 12.
- * Time: 7:45
- */
 
 namespace Barion\common;
 
@@ -49,6 +43,10 @@ abstract class TransactionType
      */
     const CARD_PROCESSING_FEE_STORNO = 'CardProcessingFeeStorno';
     /**
+     * The transaction is just a placeholder, the type will be determined later on.
+     */
+    const UNSPECIFIED = 'Unspecified';
+    /**
      * Bank card payment between a user and a shop.
      */
     const CARD_PAYMENT = 'CardPayment';
@@ -72,4 +70,20 @@ abstract class TransactionType
      * Payment is released from investigation
      */
     const RELEASE_REVIEW = 'ReleaseReview';
+    /**
+     * Bank transfer payment between customer and shop. Used in payment button scenarios.
+     */
+    const BANK_TRANSFER_PAYMENT = 'BankTransferPayment';
+    /**
+     * Refund of a payment to a bank account. Used in payment button scenarios.
+     */
+    const REFUND_TO_BANK_ACCOUNT = 'RefundToBankAccount';
+    /**
+     * Storno of an unsuccessful refund to a bank account. Used in payment button scenarios.
+     */
+    const STORNO_UN_SUCCESSFUL_REFUND_TO_BANK_ACCOUNT = 'StornoUnSuccessfulRefundToBankAccount';
+    /**
+     * The fee deducted from the shop by the Barion system for using the bank transfer payment. Used in payment button scenarios.
+     */
+    const BANK_TRANSFER_PAYMENT_FEE = 'BankTransferPaymentFee';
 }
