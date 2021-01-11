@@ -22,19 +22,27 @@ use Barion\common\Constants;
 use Barion\common\QRCodeSize;
 use Barion\models\ApiErrorModel;
 use Barion\models\BaseResponseModel;
-use Barion\models\FinishReservationRequestModel;
-use Barion\models\FinishReservationResponseModel;
-use Barion\models\PaymentQRRequestModel;
-use Barion\models\PaymentStateRequestModel;
-use Barion\models\PaymentStateResponseModel;
-use Barion\models\PreparePaymentRequestModel;
-use Barion\models\PreparePaymentResponseModel;
-use Barion\models\RefundRequestModel;
-use Barion\models\RefundResponseModel;
+use Barion\models\payment\CancelAuthorizationRequestModel;
+use Barion\models\payment\CancelAuthorizationResponseModel;
+use Barion\models\payment\CaptureRequestModel;
+use Barion\models\payment\CaptureResponseModel;
+use Barion\models\payment\Complete3DSPaymentRequestModel;
+use Barion\models\payment\Complete3DSPaymentResponseModel;
+use Barion\models\payment\FinishReservationRequestModel;
+use Barion\models\payment\FinishReservationResponseModel;
+use Barion\models\payment\PaymentQRRequestModel;
+use Barion\models\payment\PaymentStateRequestModel;
+use Barion\models\payment\PaymentStateResponseModel;
+use Barion\models\payment\PreparePaymentRequestModel;
+use Barion\models\payment\PreparePaymentResponseModel;
+use Barion\models\refund\RefundRequestModel;
+use Barion\models\refund\RefundResponseModel;
 
 /**
  * Class BarionClient
  * PHP library for implementing REST API calls towards the Barion payment system.
+ *
+ * @package Barion
  */
 class BarionClient
 {
@@ -125,6 +133,64 @@ class BarionClient
         return $rm;
     }
 
+    /**
+     *
+     * Capture the previously authorized money in a Delayed Capture payment
+     *
+     * @param CaptureRequestModel $model The request model for the capture process
+     * @return CaptureResponseModel Returns the response from the Barion API
+     */
+    public function Capture(CaptureRequestModel $model)
+    {
+        $model->POSKey = $this->POSKey;
+        $url = $this->BARION_API_URL . "/v" . $this->APIVersion . Constants::API_ENDPOINT_CAPTURE;
+        $response = $this->PostToBarion($url, $model);
+        $captureResponse = new CaptureResponseModel();
+        if (!empty($response)) {
+            $json = json_decode($response, true);
+            $captureResponse->fromJson($json);
+        }
+        return $captureResponse;
+    }
+
+    /**
+     *
+     * Cancel a pending authorization on a Delayed Capture payment
+     *
+     * @param CancelAuthorizationRequestModel $model The request model for cancelling the authorization
+     * @return CancelAuthorizationResponseModel Returns the response from the Barion API
+     */
+    public function CancelAuthorization(CancelAuthorizationRequestModel $model)
+    {
+        $model->POSKey = $this->POSKey;
+        $url = $this->BARION_API_URL . "/v" . $this->APIVersion . Constants::API_ENDPOINT_CANCELAUTHORIZATION;
+        $response = $this->PostToBarion($url, $model);
+        $cancelAuthResponse = new CancelAuthorizationResponseModel();
+        if (!empty($response)) {
+            $json = json_decode($response, true);
+            $cancelAuthResponse->fromJson($json);
+        }
+        return $cancelAuthResponse;
+    }
+
+    /**
+     * Complete a previously 3DSecure-authenticated payment
+     *
+     * @param Complete3DSPaymentRequestModel $model The request model for completing the authenticated payment
+     * @return Complete3DSPaymentResponseModel Returns the response from the Barion API
+     */
+    public function Complete3DSPayment(Complete3DSPaymentRequestModel $model)
+    {
+        $model->POSKey = $this->POSKey;
+        $url = $this->BARION_API_URL . "/v" . $this->APIVersion . Constants::API_ENDPOINT_3DS_COMPLETE;
+        $response = $this->PostToBarion($url, $model);
+        $rm = new Complete3DSPaymentResponseModel();
+        if (!empty($response)) {
+            $json = json_decode($response, true);
+            $rm->fromJson($json);
+        }
+        return $rm;
+    }
 
     /**
      * Refund a payment partially or totally
@@ -193,9 +259,6 @@ class BarionClient
 
     /* -------- CURL HTTP REQUEST IMPLEMENTATIONS -------- */
 
-    /*
-    *
-    */
     /**
      * Managing HTTP POST requests
      *
@@ -208,7 +271,7 @@ class BarionClient
         $ch = curl_init();
 
         if(isset($_SERVER['HTTP_USER_AGENT']) && $_SERVER['HTTP_USER_AGENT'] != ''){
-            $userAgent = $_SERVER['HTTP_USER_AGENT'];    
+            $userAgent = $_SERVER['HTTP_USER_AGENT'];
         } else {
             $cver = curl_version();
             $userAgent = "curl/" . $cver["version"] . " " . $cver["ssl_version"];
@@ -221,6 +284,10 @@ class BarionClient
         curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json", "User-Agent: $userAgent"));
+
+        if(substr(phpversion(), 0, 3) < 5.6) {
+            curl_setopt($ch, CURLOPT_SSLVERSION, 6);
+        }
 
         if ($this->UseBundledRootCertificates) {
             curl_setopt($ch, CURLOPT_CAINFO, join(DIRECTORY_SEPARATOR, array(dirname(__FILE__), 'ssl', 'cacert.pem')));
@@ -262,7 +329,7 @@ class BarionClient
         $fullUrl = $url . '?' . $getData;
 
         if(isset($_SERVER['HTTP_USER_AGENT']) && $_SERVER['HTTP_USER_AGENT'] != ''){
-            $userAgent = $_SERVER['HTTP_USER_AGENT'];    
+            $userAgent = $_SERVER['HTTP_USER_AGENT'];
         } else {
             $cver = curl_version();
             $userAgent = "curl/" . $cver["version"] . " " . $cver["ssl_version"];
@@ -271,6 +338,10 @@ class BarionClient
         curl_setopt($ch, CURLOPT_URL, $fullUrl);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array("User-Agent: $userAgent"));
+
+        if(substr(phpversion(), 0, 3) < 5.6) {
+            curl_setopt($ch, CURLOPT_SSLVERSION, 6);
+        }
 
         if ($this->UseBundledRootCertificates) {
             curl_setopt($ch, CURLOPT_CAINFO, join(DIRECTORY_SEPARATOR, array(dirname(__FILE__), 'ssl', 'cacert.pem')));
