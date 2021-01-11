@@ -15,43 +15,46 @@
  * limitations under the License.
  */
 
-namespace Barion\models;
+namespace Barion\models\_3dsecure;
 
 use Barion\helpers\iBarionModel;
 use function Barion\helpers\jget;
 
 /**
- * Class BankCardModel
- * @package Barion\models
+ * Class BillingAddressModel
+ * @package Barion\models\_3dsecure
  */
-class BankCardModel implements iBarionModel
+class BillingAddressModel implements iBarionModel
 {
-    public $MaskedPan;
-    public $BankCardType;
-    public $ValidThruYear;
-    public $ValidThruMonth;
+    public $Country;
+    public $Region;
+    public $City;
+    public $Zip;
+    public $Street;
+    public $Street2;
+    public $Street3;
 
-    /**
-     * BankCardModel constructor.
-     */
     function __construct()
     {
-        $this->MaskedPan = "";
-        $this->BankCardType = "";
-        $this->ValidThruYear = "";
-        $this->ValidThruMonth = "";
+        $this->Country = "";
+        $this->Region = "";
+        $this->City = "";
+        $this->Zip = "";
+        $this->Street = "";
+        $this->Street2 = "";
+        $this->Street3 = "";
     }
 
-    /**
-     * @param array $json
-     */
     public function fromJson($json)
     {
         if (!empty($json)) {
-            $this->MaskedPan = jget($json, 'MaskedPan');
-            $this->BankCardType = jget($json, 'BankCardType');
-            $this->ValidThruYear = jget($json, 'ValidThruYear');
-            $this->ValidThruMonth = jget($json, 'ValidThruMonth');
+            $this->Country = jget($json, 'Country');
+            $this->Region = jget($json, 'Region');
+            $this->City = jget($json, 'City');
+            $this->Zip = jget($json, 'Zip');
+            $this->Street = jget($json, 'Street');
+            $this->Street2 = jget($json, 'Street2');
+            $this->Street3 = jget($json, 'Street3');
         }
     }
 }

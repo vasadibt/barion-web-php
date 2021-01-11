@@ -15,60 +15,44 @@
  * limitations under the License.
  */
 
-namespace Barion\models;
+namespace Barion\models\common;
 
 use Barion\helpers\iBarionModel;
+use function Barion\helpers\jget;
 
 /**
- * Class RefundedTransactionModel
- * @package Barion\models
+ * Class BankCardModel
+ * @package Barion\models\common
  */
-class RefundedTransactionModel implements iBarionModel
+class FundingInformationModel implements iBarionModel
 {
     /**
-     * @var string
+     * @var BankCardModel
      */
-    public $TransactionId;
-    /**
-     * @var int
-     */
-    public $Total;
+    public $BankCard;
     /**
      * @var string
      */
-    public $POSTransactionId;
-    /**
-     * @var string
-     */
-    public $Comment;
-    /**
-     * @var string
-     */
-    public $Status;
+    public $AuthorizationCode;
 
     /**
-     * RefundedTransactionModel constructor.
+     * FundingInformationModel constructor.
      */
     function __construct()
     {
-        $this->TransactionId = "";
-        $this->Total = 0;
-        $this->POSTransactionId = "";
-        $this->Comment = "";
-        $this->Status = "";
+        $this->BankCard = new BankCardModel();
+        $this->AuthorizationCode = "";
     }
 
     /**
-     * @param array $json
+     * @param $json
      */
     public function fromJson($json)
     {
         if (!empty($json)) {
-            $this->TransactionId = $json['TransactionId'];
-            $this->Total = $json['Total'];
-            $this->POSTransactionId = $json['POSTransactionId'];
-            $this->Comment = $json['Comment'];
-            $this->Status = $json['Status'];
+            $this->BankCard = new BankCardModel();
+            $this->BankCard->fromJson(jget($json, 'BankCard'));
+            $this->AuthorizationCode = jget($json, 'AuthorizationCode');
         }
     }
 }

@@ -23,5 +23,9 @@ namespace Barion\helpers;
  */
 interface iBarionModel
 {
+    /**
+     * @param array $json
+     * @return string|null|mixed
+     */
     public function fromJson($json);
 }

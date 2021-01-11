@@ -15,45 +15,52 @@
  * limitations under the License.
  */
 
-namespace Barion\models;
+namespace Barion\models\payment;
+
+use Barion\models\common\ItemModel;
 
 /**
- * Class TransactionToFinishModel
- * @package Barion\models
+ * Class CancelAuthorizationRequestModel
+ * @package Barion\models\payment
  */
-class TransactionToFinishModel
+class PaymentTransactionModel
 {
     /**
      * @var string
      */
-    public $TransactionId;
+    public $POSTransactionId;
+    /**
+     * @var string
+     */
+    public $Payee;
     /**
      * @var int
      */
     public $Total;
     /**
-     * @var array
-     */
-    public $PayeeTransactions;
-    /**
-     * @var array
-     */
-    public $Items;
-    /**
      * @var string
      */
     public $Comment;
+    /**
+     * @var ItemModel[]
+     */
+    public $Items;
+    /**
+     * @var PayeeTransactionModel[]
+     */
+    public $PayeeTransactions;
 
     /**
-     * TransactionToFinishModel constructor.
+     * PaymentTransactionModel constructor.
      */
     function __construct()
     {
-        $this->TransactionId = "";
+        $this->POSTransactionId = "";
+        $this->Payee = "";
         $this->Total = 0;
-        $this->PayeeTransactions = array();
         $this->Comment = "";
         $this->Items = array();
+        $this->PayeeTransactions = array();
     }
 
     /**
@@ -68,7 +75,7 @@ class TransactionToFinishModel
     }
 
     /**
-     * @param $items
+     * @param ItemModel[] $items
      */
     public function AddItems($items)
     {
@@ -82,9 +89,9 @@ class TransactionToFinishModel
     }
 
     /**
-     * @param PayeeTransactionToFinishModel $model
+     * @param PayeeTransactionModel $model
      */
-    public function AddPayeeTransaction(PayeeTransactionToFinishModel $model)
+    public function AddPayeeTransaction(PayeeTransactionModel $model)
     {
         if ($this->PayeeTransactions == null) {
             $this->PayeeTransactions = array();
@@ -93,13 +100,13 @@ class TransactionToFinishModel
     }
 
     /**
-     * @param $transactions
+     * @param PayeeTransactionModel $transactions
      */
     public function AddPayeeTransactions($transactions)
     {
         if (!empty($transactions)) {
             foreach ($transactions as $transaction) {
-                if ($transaction instanceof PayeeTransactionToFinishModel) {
+                if ($transaction instanceof PayeeTransactionModel) {
                     $this->AddPayeeTransaction($transaction);
                 }
             }

@@ -15,44 +15,41 @@
  * limitations under the License.
  */
 
-namespace Barion\models;
+namespace Barion\models\payment;
 
-use Barion\helpers\iBarionModel;
-use function Barion\helpers\jget;
+use Barion\common\QRCodeSize;
+use Barion\models\BaseRequestModel;
 
 /**
- * Class FundingInformationModel
- * @package Barion\models
+ * Class CancelAuthorizationRequestModel
+ * @package Barion\models\payment
  */
-class FundingInformationModel implements iBarionModel
+class PaymentQRRequestModel extends BaseRequestModel
 {
-    /**
-     * @var BankCardModel
-     */
-    public $BankCard;
     /**
      * @var string
      */
-    public $AuthorizationCode;
+    public $UserName;
+    /**
+     * @var string
+     */
+    public $Password;
+    /**
+     * @var string
+     */
+    public $PaymentId;
+    /**
+     * @var string
+     */
+    public $Size;
 
     /**
-     * FundingInformationModel constructor.
+     * PaymentQRRequestModel constructor.
+     * @param $paymentId
      */
-    function __construct()
+    function __construct($paymentId)
     {
-        $this->BankCard = new BankCardModel();
-        $this->AuthorizationCode = "";
-    }
-
-    /**
-     * @param $json
-     */
-    public function fromJson($json)
-    {
-        if (!empty($json)) {
-            $this->BankCard = new BankCardModel();
-            $this->BankCard->fromJson(jget($json, 'BankCard'));
-            $this->AuthorizationCode = jget($json, 'AuthorizationCode');
-        }
+        $this->PaymentId = $paymentId;
+        $this->Size = QRCodeSize::Normal;
     }
 }
