@@ -1,20 +1,17 @@
 <?php
-
 /*
 *  Barion PHP library usage example
-*  
+*
 *  Starting a payment with a product of 75€, supplying parameters required for 3D-secure authentication.
-*  
+*
 *  � 2019 Barion Payment Inc.
 */
-
-require_once '../library/BarionClient.php';
 
 $myPosKey = "11111111-1111-1111-1111-111111111111"; // <-- Replace this with your POSKey!
 $myEmailAddress = "mywebshop@example.com"; // <-- Replace this with your e-mail address in Barion!
 
 // Barion Client that connects to the TEST environment
-$BC = new BarionClient($myPosKey, 2, BarionEnvironment::Test);
+$BC = new \Barion\BarionClient($myPosKey, 2, \Barion\common\BarionEnvironment::Test);
 
 // helper variable, containing the timestamp 10 minutes ago
 $now = date("Y-m-d H:i:s", (time() - 600));
@@ -23,7 +20,7 @@ $now = date("Y-m-d H:i:s", (time() - 600));
 $payerEmail = "john.doe@example.com";
 
 // create the item model
-$item = new ItemModel();
+$item = new \Barion\models\common\ItemModel();
 $item->Name = "TestItem"; // no more than 250 characters
 $item->Description = "A test item for payment"; // no more than 500 characters
 $item->Quantity = 1;
@@ -33,7 +30,7 @@ $item->ItemTotal = 75;
 $item->SKU = "ITEM-01"; // no more than 100 characters
 
 // create the transaction
-$trans = new PaymentTransactionModel();
+$trans = new \Barion\models\payment\PaymentTransactionModel();
 $trans->POSTransactionId = "TRANS-01";
 $trans->Payee = $myEmailAddress; // no more than 256 characters
 $trans->Total = 75;
@@ -41,7 +38,7 @@ $trans->Comment = "Test Transaction"; // no more than 640 characters
 $trans->AddItem($item); // add the item to the transaction
 
 // create the addresses
-$shippingAddress = new ShippingAddressModel();
+$shippingAddress = new \Barion\models\_3dsecure\ShippingAddressModel();
 $shippingAddress->Country = "DE";
 $shippingAddress->Region = null;
 $shippingAddress->City = "Berlin";
@@ -51,7 +48,7 @@ $shippingAddress->Street2 = "1. ebene";
 $shippingAddress->Street3 = "";
 $shippingAddress->FullName = "Thomas Testing";
 
-$billingAddress = new BillingAddressModel();
+$billingAddress = new \Barion\models\_3dsecure\BillingAddressModel();
 $billingAddress->Country = "DE";
 $billingAddress->Region = null;
 $billingAddress->City = "Berlin";
@@ -61,46 +58,46 @@ $billingAddress->Street2 = "1. ebene";
 $billingAddress->Street3 = "";
 
 // 3DS information about the payer
-$payerAccountInfo = new PayerAccountInformationModel();
+$payerAccountInfo = new \Barion\models\_3dsecure\PayerAccountInformationModel();
 $payerAccountInfo->AccountId = "4690011905085639";
 $payerAccountInfo->AccountCreated = $now;
-$payerAccountInfo->AccountCreationIndicator = AccountCreationIndicator::CreatedDuringThisTransaction;
+$payerAccountInfo->AccountCreationIndicator = \Barion\common\AccountCreationIndicator::CreatedDuringThisTransaction;
 $payerAccountInfo->AccountLastChanged = $now;
-$payerAccountInfo->AccountChangeIndicator = AccountChangeIndicator::ChangedDuringThisTransaction;
+$payerAccountInfo->AccountChangeIndicator = \Barion\common\AccountChangeIndicator::ChangedDuringThisTransaction;
 $payerAccountInfo->PasswordLastChanged = $now;
-$payerAccountInfo->PasswordChangeIndicator = PasswordChangeIndicator::NoChange;
+$payerAccountInfo->PasswordChangeIndicator = \Barion\common\PasswordChangeIndicator::NoChange;
 $payerAccountInfo->PurchasesInTheLastSixMonths = 6;
 $payerAccountInfo->ShippingAddressAdded = $now;
-$payerAccountInfo->ShippingAddressUsageIndicator = ShippingAddressUsageIndicator::ThisTransaction;
+$payerAccountInfo->ShippingAddressUsageIndicator = \Barion\common\ShippingAddressUsageIndicator::ThisTransaction;
 $payerAccountInfo->PaymentMethodAdded = $now;
-$payerAccountInfo->PaymentMethodIndicator = PaymentMethodIndicator::ThisTransaction;
+$payerAccountInfo->PaymentMethodIndicator = \Barion\common\PaymentMethodIndicator::ThisTransaction;
 $payerAccountInfo->ProvisionAttempts = 1;
 $payerAccountInfo->TransactionalActivityPerDay = 1;
 $payerAccountInfo->TransactionalActivityPerYear = 100;
-$payerAccountInfo->SuspiciousActivityIndicator = SuspiciousActivityIndicator::NoSuspiciousActivityObserved;
+$payerAccountInfo->SuspiciousActivityIndicator = \Barion\common\SuspiciousActivityIndicator::NoSuspiciousActivityObserved;
 
 // 3DS information about the purchase
-$purchaseInfo = new PurchaseInformationModel();
-$purchaseInfo->DeliveryTimeframe = DeliveryTimeFrameType::OvernightShipping;
+$purchaseInfo = new \Barion\models\_3dsecure\PurchaseInformationModel();
+$purchaseInfo->DeliveryTimeframe = \Barion\common\DeliveryTimeframeType::OvernightShipping;
 $purchaseInfo->DeliveryEmailAddress = $payerEmail;
 $purchaseInfo->PreOrderDate = $now;
-$purchaseInfo->AvailabilityIndicator = AvailabilityIndicator::MerchandiseAvailable;
-$purchaseInfo->ReOrderIndicator = ReOrderIndicator::FirstTimeOrdered;
+$purchaseInfo->AvailabilityIndicator = \Barion\common\AvailabilityIndicator::MerchandiseAvailable;
+$purchaseInfo->ReOrderIndicator = \Barion\common\ReOrderIndicator::FirstTimeOrdered;
 $purchaseInfo->RecurringExpiry = "2099-12-31 23:59:59";
 $purchaseInfo->RecurringFrequency = "0";
-$purchaseInfo->ShippingAddressIndicator = ShippingAddressIndicator::ShipToCardholdersBillingAddress;
+$purchaseInfo->ShippingAddressIndicator = \Barion\common\ShippingAddressIndicator::ShipToCardholdersBillingAddress;
 $purchaseInfo->GiftCardPurchase = null;
-$purchaseInfo->PurchaseType = PurchaseType::GoodsAndServicePurchase;
+$purchaseInfo->PurchaseType = \Barion\common\PurchaseType::GoodsAndServicePurchase;
 
 // create the request model
-$psr = new PreparePaymentRequestModel();
+$psr = new \Barion\models\payment\PreparePaymentRequestModel();
 $psr->GuestCheckout = true; // we allow guest checkout
-$psr->PaymentType = PaymentType::Immediate; // we want an immediate payment
-$psr->FundingSources = array(FundingSourceType::All); // both Barion wallet and bank card accepted
+$psr->PaymentType = \Barion\common\PaymentType::Immediate; // we want an immediate payment
+$psr->FundingSources = array(\Barion\common\FundingSourceType::All); // both Barion wallet and bank card accepted
 $psr->PaymentRequestId = "TESTPAY-01"; // no more than 100 characters
 $psr->PayerHint = $payerEmail; // no more than 256 characters
-$psr->Locale = UILocale::EN; // the UI language will be English 
-$psr->Currency = Currency::EUR;
+$psr->Locale = \Barion\common\UILocale::EN; // the UI language will be English
+$psr->Currency = \Barion\common\Currency::EUR;
 $psr->OrderNumber = "ORDER-0001"; // no more than 100 characters
 $psr->AddTransaction($trans); // add the transaction to the payment
 
@@ -113,12 +110,12 @@ $psr->PayerWorkPhoneNumber = "36301122334";
 $psr->PayerHomePhoneNumber = "36301122334";
 $psr->PayerAccountInformation = $payerAccountInfo;
 $psr->PurchaseInformation = $purchaseInfo;
-$psr->ChallengePreference = ChallengePreference::NoPreference;
+$psr->ChallengePreference = \Barion\common\ChallengePreference::NoPreference;
 
 // send the request
 $myPayment = $BC->PreparePayment($psr);
 
 if ($myPayment->RequestSuccessful === true) {
   // redirect the user to the Barion Smart Gateway
-  header("Location: " . BARION_WEB_URL_TEST . "?id=" . $myPayment->PaymentId);
+  header("Location: " . \Barion\common\Constants::BARION_WEB_URL_TEST . "?id=" . $myPayment->PaymentId);
 }
