@@ -17,8 +17,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Barion\\": "library/",
-			"Barion\\library\\models\\_3dsecure\\": "library/models/3dsecure"
+			"Barion\\": "library/"
 		}
 	}
 }
