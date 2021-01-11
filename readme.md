@@ -67,16 +67,16 @@ The environment to connect to. This can be the test system, or the production en
 
 ```php
 // Test environment
-$environment = BarionEnvironment::Test;
+$environment = \Barion\common\BarionEnvironment::Test;
 
 // Production environment
-$environment = BarionEnvironment::Prod;
+$environment = \Barion\common\BarionEnvironment::Prod;
 ```
 
 With these parameters you can create an instance of the **BarionClient** class:
 
 ```php
-$BC = new BarionClient($myPosKey, $apiVersion, $environment);
+$BC = new \Barion\BarionClient($myPosKey, $apiVersion, $environment);
 ```
 
 If you're having problems with the SSL connection then you can set the fourth parameter to true: `$useBundledRootCerts`
@@ -95,7 +95,7 @@ To start an online payment, you have to create one or more **Payment Transaction
 First, create an **ItemModel**:
 
 ```php
-$item = new ItemModel();
+$item = new \Barion\models\common\ItemModel();
 $item->Name = "TestItem";
 $item->Description = "A test product";
 $item->Quantity = 1;
@@ -108,11 +108,11 @@ $item->SKU = "ITEM-01";
 Then create a **PaymentTransactionModel** and add the **Item** mentioned above to it:
 
 ```php
-$trans = new PaymentTransactionModel();
+$trans = new \Barion\models\payment\PaymentTransactionModel();
 $trans->POSTransactionId = "TRANS-01";
 $trans->Payee = "webshop@example.com";
 $trans->Total = 1000;
-$trans->Currency = Currency::HUF;
+$trans->Currency = \Barion\common\Currency::HUF;
 $trans->Comment = "Test transaction containing the product";
 $trans->AddItem($item);
 ```
@@ -120,15 +120,15 @@ $trans->AddItem($item);
 Finally, create a **PreparePaymentRequestModel** and add the **PaymentTransactionModel** mentioned above to it:
 
 ```php
-$ppr = new PreparePaymentRequestModel();
+$ppr = new \Barion\models\payment\PreparePaymentRequestModel();
 $ppr->GuestCheckout = true;
-$ppr->PaymentType = PaymentType::Immediate;
-$ppr->FundingSources = array(FundingSourceType::All);
+$ppr->PaymentType = \Barion\common\PaymentType::Immediate;
+$ppr->FundingSources = array(\Barion\common\FundingSourceType::All);
 $ppr->PaymentRequestId = "PAYMENT-01";
 $ppr->PayerHint = "user@example.com";
-$ppr->Locale = UILocale::EN;
+$ppr->Locale = \Barion\common\UILocale::EN;
 $ppr->OrderNumber = "ORDER-0001";
-$ppr->Currency = Currency::HUF;
+$ppr->Currency = \Barion\common\Currency::HUF;
 $ppr->ShippingAddress = "12345 NJ, Example ave. 6.";
 $ppr->RedirectUrl = "http://webshop.example.com/afterpayment";
 $ppr->CallbackUrl = "http://webshop.example.com/processpayment";
