@@ -19,7 +19,6 @@
 		"psr-4": {
 			"Barion\\": "library/",
 			"Barion\\library\\models\\_3dsecure": "library/models/3dsecure"
-		},
-		"files": [ "library/helpers/BarionHelper.php" ]
+		}
 	}
 }
