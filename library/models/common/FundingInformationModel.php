@@ -17,8 +17,8 @@
 
 namespace Barion\models\common;
 
+use Barion\helpers\BarionHelper;
 use Barion\helpers\iBarionModel;
-use function Barion\helpers\jget;
 
 /**
  * Class BankCardModel
@@ -51,8 +51,8 @@ class FundingInformationModel implements iBarionModel
     {
         if (!empty($json)) {
             $this->BankCard = new BankCardModel();
-            $this->BankCard->fromJson(jget($json, 'BankCard'));
-            $this->AuthorizationCode = jget($json, 'AuthorizationCode');
+            $this->BankCard->fromJson(BarionHelper::jget($json, 'BankCard'));
+            $this->AuthorizationCode = BarionHelper::jget($json, 'AuthorizationCode');
         }
     }
 }

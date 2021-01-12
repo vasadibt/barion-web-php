@@ -17,8 +17,8 @@
 
 namespace Barion\models\_3dsecure;
 
+use Barion\helpers\BarionHelper;
 use Barion\helpers\iBarionModel;
-use function Barion\helpers\jget;
 
 /**
  * Class BillingAddressModel
@@ -50,14 +50,14 @@ class ShippingAddressModel implements iBarionModel
     public function fromJson($json)
     {
         if (!empty($json)) {
-            $this->Country = jget($json, 'Country');
-            $this->Region = jget($json, 'Region');
-            $this->City = jget($json, 'City');
-            $this->Zip = jget($json, 'Zip');
-            $this->Street = jget($json, 'Street');
-            $this->Street2 = jget($json, 'Street2');
-            $this->Street3 = jget($json, 'Street3');
-            $this->FullName = jget($json, 'FullName');
+            $this->Country = BarionHelper::jget($json, 'Country');
+            $this->Region = BarionHelper::jget($json, 'Region');
+            $this->City = BarionHelper::jget($json, 'City');
+            $this->Zip = BarionHelper::jget($json, 'Zip');
+            $this->Street = BarionHelper::jget($json, 'Street');
+            $this->Street2 = BarionHelper::jget($json, 'Street2');
+            $this->Street3 = BarionHelper::jget($json, 'Street3');
+            $this->FullName = BarionHelper::jget($json, 'FullName');
         }
     }
 }

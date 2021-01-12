@@ -17,9 +17,9 @@
 
 namespace Barion\models\payment;
 
+use Barion\helpers\BarionHelper;
 use Barion\helpers\iBarionModel;
 use Barion\models\BaseResponseModel;
-use function Barion\helpers\jget;
 
 /**
  * Class CancelAuthorizationRequestModel
@@ -78,11 +78,11 @@ class PreparePaymentResponseModel extends BaseResponseModel implements iBarionMo
     {
         if (!empty($json)) {
             parent::fromJson($json);
-            $this->PaymentId = jget($json, 'PaymentId');
-            $this->PaymentRequestId = jget($json, 'PaymentRequestId');
-            $this->Status = jget($json, 'Status');
-            $this->QRUrl = jget($json, 'QRUrl');
-            $this->RecurrenceResult = jget($json, 'RecurrenceResult');
+            $this->PaymentId = BarionHelper::jget($json, 'PaymentId');
+            $this->PaymentRequestId = BarionHelper::jget($json, 'PaymentRequestId');
+            $this->Status = BarionHelper::jget($json, 'Status');
+            $this->QRUrl = BarionHelper::jget($json, 'QRUrl');
+            $this->RecurrenceResult = BarionHelper::jget($json, 'RecurrenceResult');
             $this->Transactions = array();
 
             if (!empty($json['Transactions'])) {

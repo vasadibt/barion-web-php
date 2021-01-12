@@ -17,8 +17,8 @@
 
 namespace Barion\models\_3dsecure;
 
+use Barion\helpers\BarionHelper;
 use Barion\helpers\iBarionModel;
-use function Barion\helpers\jget;
 
 /**
  * Class BillingAddressModel
@@ -38,8 +38,8 @@ class GiftCardPurchaseModel implements iBarionModel
     public function fromJson($json)
     {
         if (!empty($json)) {
-            $this->Amount = jget($json, 'Amount');
-            $this->Count = jget($json, 'Count');
+            $this->Amount = BarionHelper::jget($json, 'Amount');
+            $this->Count = BarionHelper::jget($json, 'Count');
         }
     }
 }

@@ -17,9 +17,9 @@
 
 namespace Barion\models\payment;
 
+use Barion\helpers\BarionHelper;
 use Barion\helpers\iBarionModel;
 use Barion\models\BaseResponseModel;
-use function Barion\helpers\jget;
 
 /**
  * Class CancelAuthorizationRequestModel
@@ -48,10 +48,10 @@ class CaptureResponseModel extends BaseResponseModel implements iBarionModel
         if (!empty($json)) {
             parent::fromJson($json);
 
-            $this->IsSuccessful = jget($json, 'IsSuccessful');
-            $this->PaymentId = jget($json, 'PaymentId');
-            $this->PaymentRequestId = jget($json, 'PaymentRequestId');
-            $this->Status = jget($json, 'Status');
+            $this->IsSuccessful = BarionHelper::jget($json, 'IsSuccessful');
+            $this->PaymentId = BarionHelper::jget($json, 'PaymentId');
+            $this->PaymentRequestId = BarionHelper::jget($json, 'PaymentRequestId');
+            $this->Status = BarionHelper::jget($json, 'Status');
 
             $this->Transactions = array();
 

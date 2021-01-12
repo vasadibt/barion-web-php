@@ -17,9 +17,9 @@
 
 namespace Barion\models\refund;
 
+use Barion\helpers\BarionHelper;
 use Barion\helpers\iBarionModel;
 use Barion\models\BaseResponseModel;
-use function Barion\helpers\jget;
 
 /**
  * Class RefundedTransactionModel
@@ -54,7 +54,7 @@ class RefundResponseModel extends BaseResponseModel implements iBarionModel
         if (!empty($json)) {
             parent::fromJson($json);
 
-            $this->PaymentId = jget($json, 'PaymentId');
+            $this->PaymentId = BarionHelper::jget($json, 'PaymentId');
             $this->RefundedTransactions = array();
 
             if (!empty($json['RefundedTransactions'])) {
